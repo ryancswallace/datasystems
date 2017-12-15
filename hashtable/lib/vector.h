@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-#include "hash_table.h"
+#include "hash_table.h" 
 
 // a variable size vector of any type
 typedef struct vector {
