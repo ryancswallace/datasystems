@@ -3,8 +3,7 @@
 
 #include <stdlib.h>
 
-typedef int keyType;
-typedef int valType;
+#include "data.h"
 
 // a single node of linked-list of arrays of a hashtable
 typedef struct node {
