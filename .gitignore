@@ -162,3 +162,4 @@ venv.bak/
 *.DS_Store
 /data
 /metastore_db
+/CS61

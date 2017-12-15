@@ -1,23 +1,23 @@
 CC = gcc -std=c99
-CFLAGS = -ggdb3 -g -W -Wall -Wextra -Werror -O3 -fsanitize=address
+CFLAGS = -Ilib -Itests -Isrc -ggdb3 -g -W -Wall -Wextra -Werror -O3 -fsanitize=address
 LDFLAGS =
 LIBS =
 
-default: main test benchmark vector
+default: src/main tests/test tests/benchmark lib/vector
 
 %.o: %.c %.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-main: hash_table.o vector.o main.o 
+main: src/hash_table.o lib/vector.o src/main.o 
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
 
-test: hash_table.o vector.o test.o 
+test: src/hash_table.o lib/vector.o tests/test.o 
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
 
-benchmark: hash_table.o vector.o benchmark.o 
+benchmark: src/hash_table.o lib/vector.o tests/benchmark.o 
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
 
-vector: hash_table.o vector.o 
+vector: src/hash_table.o lib/vector.o 
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
 
 clean:
