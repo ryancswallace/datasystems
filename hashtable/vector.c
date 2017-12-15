@@ -7,8 +7,6 @@
 
 // creates a new vector and returns a pointer to it
 vector* init_vec(size_t init_capacity, valType *init_vals, size_t init_size) {
-	printf("init_capacity %zu\n", init_capacity);
-	printf("init_size %zu\n", init_size);
 	if (init_vals != NULL) {
 		assert(init_capacity >= init_size);
 	}
@@ -52,7 +50,6 @@ vector* append(vector *vec, valType val) {
 		return vec;
 	}
 	else {
-		printf("expanding\n");
 		// create new double sized vec, copy old to new, and then add new value
 		vector *new_vec;
 		new_vec = init_vec(2 * vec->capacity, vec->buff, vec->size);

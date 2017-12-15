@@ -28,8 +28,7 @@ int main(void) {
 		put(ht, keys[i], values[i]);
 		put(ht, keys[i], values[i]);
 		put(ht, keys[i], values[i]);
-		
-		
+
 		printf("\t(%d -> %d) \n", keys[i], values[i]);
 	}
 

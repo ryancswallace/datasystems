@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-typedef int valType;
+#include "hash_table.h"
 
 // a variable size vector of any type
 typedef struct vector {

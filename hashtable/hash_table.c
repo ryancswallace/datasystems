@@ -146,7 +146,6 @@ int get(hashtable* ht, keyType key, valType **values, int num_values) {
     }
     else {
         // need to allocate ourselves
-        printf("Initializing in get with %d values\n", num_values);
         vector *values_vec = init_vec((size_t) num_values, NULL, 0);
         
         // loop like above, but add all values
@@ -171,6 +170,7 @@ void erase(hashtable* ht, keyType key) {
     int hashed_key = hash(key);
 
     node *curr_node = ht->data[hashed_key];
+    node *next_node;
     if (curr_node == NULL) {
         // hashed bucket is empty, nothing to do
         return;
@@ -178,16 +178,20 @@ void erase(hashtable* ht, keyType key) {
     else {
         while(1) {
             // check if key exists in bucket
-            for (size_t i = 0; i < curr_node->size; i++) {
+            int size = (int) curr_node->size;
+            for (int i = 0; i < size; i++) {
+                // set next node before potentially removing current node
+                next_node = curr_node->next_node;
+
                 if (curr_node->keys[i] == key) {
-                    printf("found key %d\n", key);
                     // remove pair and reshuffle array to preserve contiguity
                     if (curr_node->size > 1) {
                         // replace element to be removed with last element
                         curr_node->keys[i] = curr_node->keys[curr_node->size - 1];
                         curr_node->vals[i] = curr_node->vals[curr_node->size - 1];
+                        i--; // need to recheck i as it's now the last element
                     }
-                    curr_node->size -= 1;
+                    curr_node->size--;
 
                     if (curr_node->size == 0) {
                         // free key and value arrays
@@ -219,11 +223,11 @@ void erase(hashtable* ht, keyType key) {
                         }
 
                         free(curr_node);
+                        break;
                     }
                 }
             }
 
-            node *next_node = curr_node->next_node;
             if (next_node == NULL) {
                 // key not found; no more to check
                 break;
