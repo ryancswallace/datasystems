@@ -9,43 +9,25 @@
 // Compile and run it in the command line by typing: 
 // make test; ./test
 
-// copies random characters into array pointed to by s
-void gen_random_string(char *s, int len) {
-    static char charset[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789";
- 
-    for (int i = 0; i < len; ++i) {
-        s[i] = alphanum[rand() % (sizeof(alphanum) - 1)];
-    }
- 
-    s[len] = "\0";
-}
-
 int main(void) {
 	hashtable* ht=NULL;
 	init(&ht);
 
 	int seed = 1;
 	srand(seed);
-
 	int num_tests = 20;
-	key_len = 10;
-	val_len = 100;
-	keyType *keys = malloc(num_tests * sizeof(key *));
-	valType *vals = malloc(num_tests * sizeof(val *));
+	keyType keys[num_tests];
+	valType values[num_tests];
 
 	printf("Testing putting and getting from the hash table.\n");
 	printf("Inserting %d key-value pairs.\n", num_tests);
 	for (int i = 0; i < num_tests; i += 1) {
-		keys[i] = malloc(key_len);
-		values[i] = malloc(val_len);
-
-		gen_random_string(keys[i], key_len);
-		gen_random_string(values[i], val_len);
-
+		keys[i] = rand();
+		values[i] = rand();
 		put(ht, keys[i], values[i]);
-		put(ht, keys[i], values[i]);
-		put(ht, keys[i], values[i]);
-		put(ht, keys[i], values[i]);
+		// put(ht, keys[i], values[i]);
+		// put(ht, keys[i], values[i]);
+		// put(ht, keys[i], values[i]);
 
 		printf("\t(%d -> %d) \n", keys[i], values[i]);
 	}

@@ -92,27 +92,24 @@ void put(hashtable* ht, keyType key, valType value) {
     }
     assert(ht->data[hashed_key] != NULL);
     
-    // find last node of linked-list
-    node *last_node = ht->data[hashed_key];
-    while (last_node->next_node != NULL) {
-        last_node = last_node->next_node;
-    }
-    
-    // if last node is full, add new node
-    if (last_node->size >= ht->node_capacity) {
+    // add to the beginning of the list to avoid traversal
+    node *first_node = ht->data[hashed_key];
+
+    // if first node is full, add new node
+    if (first_node->size >= ht->node_capacity) {
         node *new_node = NULL;
         init_node(&new_node, ht->node_capacity);
 
-        last_node->next_node = new_node;
-        new_node->prev_node = last_node;
-        last_node = new_node;
+        first_node->prev_node = new_node;
+        new_node->next_node = first_node;
+        first_node = new_node;
     }
-    assert(last_node->size < ht->node_capacity);
+    assert(first_node->size < ht->node_capacity);
 
     // add new data
-    *(last_node->keys + last_node->size) = key;
-    *(last_node->vals + last_node->size) = value;
-    ++last_node->size;
+    *(first_node->keys + first_node->size) = key;
+    *(first_node->vals + first_node->size) = value;
+    ++first_node->size;
 }
 
 /* 
