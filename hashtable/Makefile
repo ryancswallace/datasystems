@@ -1,5 +1,5 @@
 CC = gcc -std=c99
-CFLAGS = -Ilib -Itests -Isrc -ggdb3 -g -W -Wall -Wextra -Werror -O3 -fsanitize=address
+CFLAGS = -Ivector -Ilib -Itests -Isrc -ggdb3 -g -W -Wall -Wextra -Werror -O3 -fsanitize=address
 LDFLAGS =
 LIBS =
 

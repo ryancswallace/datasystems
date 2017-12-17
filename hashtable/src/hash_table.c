@@ -227,7 +227,7 @@ void erase(hashtable* ht, keyType key) {
             }
 
             if (next_node == NULL) {
-                // key not found; no more to check
+                // no more to check
                 break;
             }
             else {
