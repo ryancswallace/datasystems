@@ -25,9 +25,9 @@ int main(void) {
 		keys[i] = rand();
 		values[i] = rand();
 		put(ht, keys[i], values[i]);
-		// put(ht, keys[i], values[i]);
-		// put(ht, keys[i], values[i]);
-		// put(ht, keys[i], values[i]);
+		put(ht, keys[i], values[i]);
+		put(ht, keys[i], values[i]);
+		put(ht, keys[i], values[i]);
 
 		printf("\t(%d -> %d) \n", keys[i], values[i]);
 	}

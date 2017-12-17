@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "hash_table.h" 
+#include "data.h"
 
 // a variable size vector of any type
 typedef struct vector {

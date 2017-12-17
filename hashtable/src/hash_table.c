@@ -11,6 +11,7 @@
 
 #include "hash_table.h"
 #include "vector.h"
+#include "data.h"
 
 #define NUM_BUCKETS 2501383
 

@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "vector.h"
+#include "data.h"
 
 // creates a new vector and returns a pointer to it
 vector* init_vec(size_t init_capacity, valType *init_vals, size_t init_size) {
