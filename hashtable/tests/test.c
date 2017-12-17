@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include "hash_table.h"
+#include "data.h"
 
 // This code is designed to test the correctness of your implementation. 
 // You do not need to significantly change it. 
@@ -10,20 +11,54 @@
 // make test; ./test
 
 int main(void) {
-	hashtable* ht=NULL;
+	int num_tests = 20;
+	size_t key_len = 10;
+	size_t val_len = 100;
+
+	hashtable* ht = NULL;
 	init(&ht);
 
-	int seed = 1;
-	srand(seed);
-	int num_tests = 20;
-	keyType keys[num_tests];
-	valType values[num_tests];
+	// create test keys and values
+	keyType** keys;
+	valType** vals;
+	if ((keys = malloc(num_tests * sizeof(keyType*))) == NULL) {
+		perror("malloc failed.");
+		exit(3);
+	}
+	if ((vals = malloc(num_tests * sizeof(valType*))) == NULL) {
+		perror("malloc failed.");
+		exit(3);
+	}
+
+	for (int i = 0; i < num_tests; i++) {
+		keyType* key;
+		valType* val;
+		if ((key = malloc((key_len + 1) * sizeof(keyType))) == NULL) {
+			perror("malloc failed.");
+			exit(3);
+		}
+		if ((val = malloc((val_len + 1) * sizeof(valType))) == NULL) {
+			perror("malloc failed.");
+			exit(3);
+		}
+		rand_string(key, key_len);
+		rand_string(val, val_len);
+
+		// size_t c;
+		// printf("key: ");
+		// for (c = 0; c < key_len; c++)
+  //     		printf("%c", key[(int) c]);
+  //     		printf("\n");
+  //     	printf("val: ");
+  //     	for (c = 0; c < val_len; c++)
+  //     		printf("%c", val[(int) c]);
+  //     		printf("\n");
+	}
+
 
 	printf("Testing putting and getting from the hash table.\n");
 	printf("Inserting %d key-value pairs.\n", num_tests);
 	for (int i = 0; i < num_tests; i += 1) {
-		keys[i] = rand();
-		values[i] = rand();
 		put(ht, keys[i], values[i]);
 		put(ht, keys[i], values[i]);
 		put(ht, keys[i], values[i]);
